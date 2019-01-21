@@ -1,0 +1,39 @@
+{
+  "name": "deps",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "apisauce": "^1.0.1",
+    "axios": "^0.18.0",
+    "body-parser": "~1.15.2",
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.5",
+    "debug": "~2.2.0",
+    "dotenv": "^6.2.0",
+    "express": "~4.14.0",
+    "express-fileupload": "^1.1.1-alpha.1",
+    "express-jwt": "^5.3.1",
+    "form-urlencoded": "^3.0.0",
+    "hbs": "~4.0.1",
+    "javascript-time-ago": "^2.0.1",
+    "json2csv": "^4.3.3",
+    "jsonwebtoken": "^8.4.0",
+    "moment": "^2.23.0",
+    "mongoose": "^5.4.0",
+    "mongoose-unique-validator": "^2.0.2",
+    "morgan": "~1.7.0",
+    "node-cmd": "^3.0.0",
+    "nodemon": "^1.18.9",
+    "passport": "^0.4.0",
+    "passport-bitbucket-token": "^1.0.0",
+    "qs": "^6.6.0",
+    "querystring": "^0.2.0",
+    "read-package-json": "^2.0.13",
+    "request": "^2.88.0",
+    "serve-favicon": "~2.3.0",
+    "shelljs": "^0.8.3"
+  }
+}
