@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --inspect app.js"
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "apisauce": "^1.0.1",

@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { fork } = require("child_process");
 const Bitbucket = require("../lib/bitbucket");
 const to = require("../lib/helpers/to.js");
 const request = require("request");
@@ -8,7 +9,20 @@ const axios = require("axios");
 router.get("/", (req, res) => {
   res.send({ response: "I am alive" }).status(200);
 });
-router.post("/analyze", require("../lib/analyze"));
+router.post("/analyze", async (req, res) => {
+  const analyze = fork("lib/analyze.js");
+  const socket = req.app.get("socketio");
+  analyze.send(req.body.packageJSON);
+
+  res.json({ update: "start" });
+  analyze.on("message", msg => {
+    if (typeof msg !== "string") {
+      socket.emit("final", msg);
+    } else {
+      socket.emit("update", msg);
+    }
+  });
+});
 router.post("/read_package_json", async function(req, res) {
   if (req.files) {
     res.json(JSON.parse(req.files.file.data));
