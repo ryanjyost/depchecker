@@ -5,12 +5,17 @@ const to = require("../lib/helpers/to.js");
 const request = require("request");
 const axios = require("axios");
 
+router.get("/", (req, res) => {
+  res.send({ response: "I am alive" }).status(200);
+});
 router.post("/analyze", require("../lib/analyze"));
 router.post("/read_package_json", async function(req, res) {
   if (req.files) {
     res.json(JSON.parse(req.files.file.data));
   }
 });
+
+module.exports = router;
 
 //
 // router.post("/bitbucket/get_user_repos", async function(req, res, next) {
@@ -68,5 +73,3 @@ router.post("/read_package_json", async function(req, res) {
 //     );
 //   }
 // });
-
-module.exports = router;

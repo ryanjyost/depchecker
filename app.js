@@ -7,51 +7,41 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const db = require("./db");
 const fileUpload = require("express-fileupload");
+const axios = require("axios");
+var http = require("http");
+const socketIo = require("socket.io");
+var debug = require("debug")("deps:server");
+var blocked = require("blocked");
 require("dotenv").config();
 
 const to = require("./lib/helpers/to.js");
-
-const Slack = require("./lib/slack");
-const SlackApi = Slack.createApi();
-
-// const test = async function() {
-//   let err, response;
-//   // [err, response] = await to(Slack.sendMessage(SlackApi));
-//
-//   response = await Slack.sendMessage(SlackApi);
-//
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log(response.data);
-//   }
-// };
-//
-// test();
-
-//Slack.sendMessage(SlackApi);
 
 const index = require("./routes/index");
 const users = require("./routes/users");
 
 const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
 
-app.use(fileUpload());
+/**
+ * Get port from environment and store in Express.
+ */
 
-//shellScripts();
+const port = normalizePort(process.env.PORT || "5000");
+app.set("port", port);
+
+server.listen(port);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
+app.use(fileUpload());
 
 app.use("/", index);
 app.use("/users", users);
@@ -74,4 +64,73 @@ app.use(function(err, req, res, next) {
   res.render("error");
 });
 
+app.set("socketio", io);
+io.on("connection", socket => {
+  console.log("New client connected");
+  socket.on("disconnect", () => {
+    console.log("Client disconnected");
+  });
+});
+
+var timer = blocked(() => console.log("blocked!!!!!!"));
+
+// server.on("error", onError);
+// server.on("listening", onListening);
+
 module.exports = app;
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== "listen") {
+    throw error;
+  }
+
+  var bind = typeof port === "string" ? "Pipe " + port : "Port " + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case "EACCES":
+      console.error(bind + " requires elevated privileges");
+      process.exit(1);
+      break;
+    case "EADDRINUSE":
+      console.error(bind + " is already in use");
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
+  debug("Listening on " + bind);
+}

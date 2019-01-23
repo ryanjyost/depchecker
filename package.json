@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon --inspect app.js"
   },
   "dependencies": {
     "apisauce": "^1.0.1",
     "axios": "^0.18.0",
+    "blocked": "^1.2.1",
     "body-parser": "~1.15.2",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.5",
@@ -34,6 +35,8 @@
     "read-package-json": "^2.0.13",
     "request": "^2.88.0",
     "serve-favicon": "~2.3.0",
-    "shelljs": "^0.8.3"
+    "shelljs": "^0.8.3",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0"
   }
 }
