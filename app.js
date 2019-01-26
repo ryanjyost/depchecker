@@ -12,6 +12,7 @@ var http = require("http");
 const socketIo = require("socket.io");
 var debug = require("debug")("deps:server");
 var blocked = require("blocked");
+const { fork } = require("child_process");
 require("dotenv").config();
 
 const to = require("./lib/helpers/to.js");
@@ -66,13 +67,27 @@ app.use(function(err, req, res, next) {
 
 io.on("connection", socket => {
   console.log("New client connected");
-  app.set("socketio", socket);
+  socket.emit("socketId", socket.id);
+
+  socket.on("analyze", packageJSON => {
+    const analyze = fork("lib/analyze.js");
+    analyze.send(packageJSON);
+    analyze.on("message", msg => {
+      if (typeof msg !== "string") {
+        socket.emit("final", msg);
+      } else {
+        socket.emit("update", msg);
+      }
+    });
+  });
   socket.on("disconnect", () => {
     console.log("Client disconnected");
   });
 });
 
-var timer = blocked(() => console.log("blocked!!!!!!"));
+blocked((time, stack) => {
+  console.log(`Blocked for ${time}ms, operation started here:`, stack);
+});
 
 // server.on("error", onError);
 // server.on("listening", onListening);

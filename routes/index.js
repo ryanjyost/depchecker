@@ -10,16 +10,17 @@ router.get("/", (req, res) => {
   res.send({ response: "I am alive" }).status(200);
 });
 router.post("/analyze", async (req, res) => {
+  // console.log("BODY", req.body);
   const analyze = fork("lib/analyze.js");
-  const socket = req.app.get("socketio");
+  const socketMap = req.app.get("socketMap");
   analyze.send(req.body.packageJSON);
 
   res.json({ update: "start" });
   analyze.on("message", msg => {
     if (typeof msg !== "string") {
-      socket.emit("final", msg);
+      socketMap[req.body.socketId].emit("final", msg);
     } else {
-      socket.emit("update", msg);
+      socketMap[req.body.socketId].emit("update", msg);
     }
   });
 });
