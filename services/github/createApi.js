@@ -13,5 +13,17 @@ module.exports = token => {
     }
   });
 
-  return {};
+  const getUserInstallation = username =>
+    api.get(`/users/${username}/installation`);
+
+  const getInstallation = installationId =>
+    api.get(`/app/installations/${installationId}`);
+
+  const getRepo = repoUrl => api.get(`/repos/${repoUrl}`);
+
+  return {
+    getUserInstallation,
+    getInstallation,
+    getRepo
+  };
 };

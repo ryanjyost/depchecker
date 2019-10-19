@@ -8,11 +8,10 @@ const fileUpload = require("express-fileupload");
 const http = require("http");
 const socketIo = require("socket.io");
 const debug = require("debug")("deps:server");
-
-const Handlers = require("./handlers");
-const to = require("./lib/helpers/to.js");
 require("./db");
 require("dotenv").config();
+
+const Handlers = require("./handlers");
 
 const app = express();
 const server = http.createServer(app);
@@ -22,9 +21,7 @@ const port = Handlers.server.normalizePort(process.env.PORT || "5000");
 app.set("port", port);
 server.listen(port);
 
-// 3rd part middleware
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "hbs");
+// 3rd party middleware
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -38,6 +35,7 @@ app.use("/", index);
 app.use(Handlers.middleware.notFound);
 app.use(Handlers.middleware.error);
 
+// start Socket.io and listen for new connections
 const io = socketIo(server);
 io.on("connection", Handlers.socket);
 

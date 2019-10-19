@@ -1,5 +1,5 @@
 module.exports = function(packageJson) {
-  const analyze = fork("./lib/analyze");
+  const analyze = fork("./services/analyze");
   analyze.send(packageJson);
   analyze.on("message", msg => {
     if (typeof msg !== "string") {

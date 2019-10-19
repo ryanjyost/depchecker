@@ -28,7 +28,10 @@ module.exports = async installationId => {
   const getPackageJson = (loginName, repoName) =>
     api.get(`/repos/${loginName}/${repoName}/contents/package.json`);
 
+  const getInstallationRepos = () => api.get(`/installation/repositories`);
+
   return {
-    getPackageJson
+    getPackageJson,
+    getInstallationRepos
   };
 };
