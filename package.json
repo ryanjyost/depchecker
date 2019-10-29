@@ -24,7 +24,7 @@
     "json2csv": "^4.3.3",
     "jsonwebtoken": "^8.4.0",
     "moment": "^2.23.0",
-    "mongoose": "^5.4.0",
+    "mongoose": "^5.7.5",
     "mongoose-unique-validator": "^2.0.2",
     "morgan": "~1.7.0",
     "node-cmd": "^3.0.0",
