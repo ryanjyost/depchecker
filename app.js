@@ -8,8 +8,8 @@ const fileUpload = require("express-fileupload");
 const http = require("http");
 const socketIo = require("socket.io");
 const debug = require("debug")("deps:server");
-require("./db");
 require("dotenv").config();
+require("./db");
 
 const Handlers = require("./handlers");
 

@@ -13,7 +13,7 @@ module.exports = {
     return await Installation.findOne({ githubId });
   },
   updateInstallationRepos: async (githubId, repos) => {
-    return await Installation.findOneAndUpdate(
+    return Installation.findOneAndUpdate(
       { githubId },
       { $set: { repos } },
       { new: true }

@@ -5,7 +5,8 @@ const {
   getLicenseData,
   calculateLevels,
   getRepoUrlFromNpmRepoUrl,
-  initSingleDepData
+  initSingleDepData,
+  summarizeAnalysis
 } = require("../lib");
 
 async function analyze(packageJSON, forkedProcess) {
@@ -31,11 +32,10 @@ async function analyze(packageJSON, forkedProcess) {
       if (npmData) {
         let repoUrl = getRepoUrlFromNpmRepoUrl(npmData.repository.url);
 
-        const githubUrl = `https://api.github.com/repos/${repoUrl}?client_id=${
-          process.env.GITHUB_CLIENT_ID
-        }&client_secret=${process.env.GITHUB_CLIENT_SECRET}`;
+        const githubUrl = `https://api.github.com/repos/${repoUrl}?client_id=${process.env.GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_CLIENT_SECRET}`;
 
-        let { data: githubData } = await forAxios(axios.get(githubUrl));
+        const { data } = await forAxios(axios.get(githubUrl));
+        githubData = data;
       }
 
       const DEP_DATA = initSingleDepData(
@@ -47,6 +47,7 @@ async function analyze(packageJSON, forkedProcess) {
       DEP_DATA.links.homepage = npmData.homepage;
       DEP_DATA["dist-tags"] = npmData["dist-tags"];
       DEP_DATA.versions.latest = npmData["dist-tags"].latest;
+      DEP_DATA.versions.project = dependencies[dep];
       DEP_DATA.time = {
         modified: npmData.time.modified,
         created: npmData.time.created,
@@ -58,8 +59,6 @@ async function analyze(packageJSON, forkedProcess) {
         dependencies[dep],
         npmData["dist-tags"].latest
       );
-
-      DEP_DATA.levels = calculateLevels(DEP_DATA);
 
       if (githubData) {
         DEP_DATA.links.github = githubData.html_url;
@@ -73,6 +72,12 @@ async function analyze(packageJSON, forkedProcess) {
         DEP_DATA.weeklyDownloads = downloadsData.downloads;
       }
 
+      // data is all there, calcultate levels
+      DEP_DATA.levels = calculateLevels(DEP_DATA);
+
+      console.log(`=== ${dep} ===`);
+      console.log(DEP_DATA);
+
       depsData.push(DEP_DATA);
 
       if (forkedProcess) {
@@ -80,8 +85,10 @@ async function analyze(packageJSON, forkedProcess) {
       }
     }
 
+    const analysisSummary = summarizeAnalysis(depsData);
+
     if (forkedProcess) {
-      forkedProcess.send({ type: "finalRepo", data: packageJSON.repoName });
+      forkedProcess.send({ type: "finalRepoData", data: analysisSummary });
     }
 
     return depsData.sort((a, b) => {
@@ -100,7 +107,7 @@ async function analyze(packageJSON, forkedProcess) {
 }
 
 process.on("message", async packageJSON => {
-  console.log("working");
+  console.log("Start analyzing...");
   const data = await analyze(packageJSON, process);
   process.send(data);
 });

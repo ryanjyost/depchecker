@@ -10,13 +10,13 @@ const Handlers = require("../handlers");
 const { catchErrors } = require("../lib");
 
 /* =================
-* Misc
-*/
+ * Misc
+ */
 router.post("/auth", catchErrors(Handlers.routes.authorize));
 
 /* =================
-* Installations
-*/
+ * Installations
+ */
 router.post("/installations", Handlers.routes.addInstallation);
 router.get(
   "/installations/:installationId/repos",
@@ -27,6 +27,8 @@ router.put(
   Handlers.routes.updateInstallationRepos
 );
 
+router.post("/read_package_json", Handlers.routes.readPackageJSON);
+
 router.get("/installations/:installationId", async (req, res) => {
   try {
     const installationId = req.params.installationId;
@@ -35,28 +37,6 @@ router.get("/installations/:installationId", async (req, res) => {
   } catch (e) {
     console.log("ERROR", e);
     res.json({});
-  }
-});
-
-router.post("/read_package_json", async function(req, res) {
-  if (req.files) {
-    res.json(JSON.parse(req.files.file.data));
-  } else {
-    let url = req.repoURL;
-    if (url === "string") {
-      const githubURL = `${url.replace(
-        "https://github.com",
-        "https://api.github.com/repos"
-      )}/contents/package.json?client_id=${
-        process.env.GITHUB_CLIENT_ID
-      }&client_secret=${process.env.GITHUB_CLIENT_SECRET}`;
-
-      let [err, response] = await to(axios.get(githubURL));
-
-      const buff = new Buffer(response.data.content, "base64");
-      let packageJSON = JSON.parse(buff.toString());
-      res.json(packageJSON);
-    }
   }
 });
 
@@ -73,9 +53,7 @@ router.post("/installations/:installationId/analyze", async (req, res) => {
     let err, response;
     [err, response] = await to(
       InstallationApi.get(
-        `/repos/${installation.account.login}/${
-          repo.name
-        }/contents/package.json`
+        `/repos/${installation.account.login}/${repo.name}/contents/package.json`
       )
     );
     if (err) console.error("ERRRRR", err);
@@ -89,8 +67,6 @@ router.post("/installations/:installationId/analyze", async (req, res) => {
     installationId,
     allRepos
   );
-
-  console.log(allRepos);
 
   res.json({ response: { installation } }).status(200);
 });
