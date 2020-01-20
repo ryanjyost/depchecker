@@ -8,7 +8,10 @@ module.exports = () => {
     iss: process.env.GITHUB_APP_IDENTIFIER
   };
 
-  return jwt.sign(payload, process.env.GITHUB_PRIVATE_KEY, {
+  const buff = new Buffer(process.env.GITHUB_PRIVATE_KEY_BASE64, "base64");
+  const key = buff.toString("ascii");
+
+  return jwt.sign(payload, key, {
     algorithm: "RS256"
   });
 };
