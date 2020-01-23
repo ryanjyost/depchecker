@@ -8,7 +8,7 @@ module.exports = async function(req, res) {
   if (req.files) {
     res.json(JSON.parse(req.files.file.data));
   } else {
-    let url = req.repoURL;
+    let { url } = req.body;
     const packageJSON = await GitHub.getPackageJSONFromRepoUrl(url);
     res.json(packageJSON);
   }
