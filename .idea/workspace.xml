@@ -2,50 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e4f8d48-6e79-49c5-bf62-8663cfb0baa6" name="Default" comment="tons of stuff">
-      <change afterPath="$PROJECT_DIR$/handlers/routes/getInstallationRepos.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/handlers/routes/updateInstallationRepos.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/analyze/misc.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/helpers/catchErrors.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/www" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/notFound.js" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/routes/addInstallation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/routes/authorize.js" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/routes/authorize.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/socket/analyzeInstallation.js" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/socket/analyzeInstallation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/socket/analyzeSinglePackageJson.js" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/socket/analyzeSinglePackageJson.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/socket/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/socket/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/analyze/analyze.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/analyze.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/analyze/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/analyze/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/helpers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/helpers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/stylesheets/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/github/createApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/github/createApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/github/createInstallationApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/github/createInstallationApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/error.hbs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/index.hbs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/layout.hbs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/analyze/calculateLevels.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/analyze/calculateLevels.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/analyze/getLicenseData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/analyze/getLicenseData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/analyze/misc.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/analyze/misc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/analyze/summarizeAnalysis.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/analyze/summarizeAnalysis.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/analyze.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/analyze.js" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="getInstallationRepos.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/handlers/routes/getInstallationRepos.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -54,188 +22,26 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>bitbucketapi</find>
-      <find>BUILD DA</find>
-      <find>github</find>
-      <find>whiy</find>
-      <find>license</find>
-      <find>issuesUR</find>
-      <find>account</find>
-      <find>Account</find>
-      <find>coordinates</find>
-      <find>Analyze</find>
-      <find>buildRe</find>
-      <find>console.log</find>
-      <find>buildReleaseText</find>
-      <find>issuesResponse</find>
-      <find>stars</find>
-      <find>timeAgo</find>
-      <find>GITHUB_CLIENT_ID</find>
-      <find>getting re</find>
-      <find>Pacage</find>
-      <find>forkedProcess</find>
-      <find>forkedProcess.send</find>
-      <find>packageJSON</find>
-      <find>forAxios</find>
-      <find>gatherMeta</find>
-      <find>Helpers</find>
-      <find>process</find>
-      <find>downloadsData</find>
-      <find>links</find>
-      <find>analyze</find>
-      <find>lib/analyze</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>const</replace>
-      <replace>installation</replace>
-      <replace>Installation</replace>
-      <replace>calculateVersionsBehind</replace>
-      <replace>githubResponse</replace>
-      <replace>packageJson</replace>
-    </replaceStrings>
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/db.js" />
-        <option value="$PROJECT_DIR$/models/accounts/model.js" />
-        <option value="$PROJECT_DIR$/models/accounts/index.js" />
-        <option value="$PROJECT_DIR$/lib/github/createBasicApi.js" />
-        <option value="$PROJECT_DIR$/lib/github/createAppApi.js" />
-        <option value="$PROJECT_DIR$/lib/github/createApi.js" />
-        <option value="$PROJECT_DIR$/models/index.js" />
-        <option value="$PROJECT_DIR$/models/installation/model.js" />
-        <option value="$PROJECT_DIR$/lib/github/generateSignedJWT.js" />
-        <option value="$PROJECT_DIR$/lib/analyze.js" />
-        <option value="$PROJECT_DIR$/lib/helpers/licenses.js" />
-        <option value="$PROJECT_DIR$/lib/analyze/buildReleaseText.js" />
-        <option value="$PROJECT_DIR$/lib/analyze/flags.js" />
-        <option value="$PROJECT_DIR$/lib/analyze/calculateVersionsBehind.js" />
-        <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/lib/analyze/getLicenseData.js" />
-        <option value="$PROJECT_DIR$/lib/analyze/calculateLevels.js" />
-        <option value="$PROJECT_DIR$/lib/github/index.js" />
-        <option value="$PROJECT_DIR$/lib/github/createUserApi.js" />
-        <option value="$PROJECT_DIR$/models/installation/index.js" />
-        <option value="$PROJECT_DIR$/handlers/notFound.js" />
-        <option value="$PROJECT_DIR$/handlers/server/index.js" />
-        <option value="$PROJECT_DIR$/lib/analyze/gatherMetaFromPackageJson.js" />
-        <option value="$PROJECT_DIR$/lib/helpers/to.js" />
-        <option value="$PROJECT_DIR$/services/github/getUserAccessToken.js" />
-        <option value="$PROJECT_DIR$/lib/helpers/forAxios.js" />
-        <option value="$PROJECT_DIR$/services/github/createUserApi.js" />
-        <option value="$PROJECT_DIR$/services/github/index.js" />
-        <option value="$PROJECT_DIR$/lib/index.js" />
-        <option value="$PROJECT_DIR$/services/github/createInstallationApi.js" />
-        <option value="$PROJECT_DIR$/handlers/routes/updateInstallationRepos.js" />
-        <option value="$PROJECT_DIR$/handlers/routes/index.js" />
-        <option value="$PROJECT_DIR$/handlers/index.js" />
-        <option value="$PROJECT_DIR$/handlers/process.js" />
-        <option value="$PROJECT_DIR$/handlers/socket/index.js" />
-        <option value="$PROJECT_DIR$/lib/analyze/analyze.js" />
-        <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/services/github/createApi.js" />
-        <option value="$PROJECT_DIR$/lib/analyze/misc.js" />
-        <option value="$PROJECT_DIR$/lib/analyze/index.js" />
-        <option value="$PROJECT_DIR$/handlers/socket/analyzeSinglePackageJson.js" />
-        <option value="$PROJECT_DIR$/handlers/socket/analyzeInstallation.js" />
-        <option value="$PROJECT_DIR$/services/analyze.js" />
-        <option value="$PROJECT_DIR$/lib/helpers/handleRoute.js" />
-        <option value="$PROJECT_DIR$/routes/index.js" />
-        <option value="$PROJECT_DIR$/lib/helpers/index.js" />
-        <option value="$PROJECT_DIR$/lib/helpers/catchErrors.js" />
-        <option value="$PROJECT_DIR$/handlers/routes/addInstallation.js" />
-        <option value="$PROJECT_DIR$/handlers/routes/authorize.js" />
-        <option value="$PROJECT_DIR$/handlers/routes/getInstallationRepos.js" />
-      </list>
-    </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
-    <package-json value="$PROJECT_DIR$/package.json" />
-  </component>
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="NodeModulesDirectoryManager">
-    <handled-path value="$PROJECT_DIR$/node_modules" />
-  </component>
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths>
-      <path value="$PROJECT_DIR$/package.json" />
-    </packageJsonPaths>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="113" />
-    <option name="width" value="1280" />
-    <option name="height" value="777" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="deps" type="b2602c69:ProjectViewProjectNode" />
-              <item name="deps" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="deps" type="b2602c69:ProjectViewProjectNode" />
-              <item name="deps" type="462c0819:PsiDirectoryNode" />
-              <item name="handlers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="deps" type="b2602c69:ProjectViewProjectNode" />
-              <item name="deps" type="462c0819:PsiDirectoryNode" />
-              <item name="handlers" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="deps" type="b2602c69:ProjectViewProjectNode" />
-              <item name="deps" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="deps" type="b2602c69:ProjectViewProjectNode" />
-              <item name="deps" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="helpers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="deps" type="b2602c69:ProjectViewProjectNode" />
-              <item name="deps" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
-  </component>
   <component name="PropertiesComponent">
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="NewWatcherDialog.advanced.open" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
     <property name="settings.editor.selected.configurable" value="watcher.settings" />
   </component>
   <component name="RecentsManager">
@@ -252,15 +58,15 @@
       <recent name="$PROJECT_DIR$/models/accounts" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
+  <component name="ServiceViewManager">
+    <option name="viewStates">
       <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
       </list>
     </option>
   </component>
@@ -371,69 +177,18 @@
       <option name="project" value="LOCAL" />
       <updated>1570234273394</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="read url package json">
+      <created>1579744056688</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1579744056688</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="278621000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="777" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32831326" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32910052" />
-      <window_info id="npm" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32169312" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24474959" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Command Line Tools Console" order="8" weight="0.32916668" />
-      <window_info anchor="bottom" id="Messages" order="7" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3298193" />
-    </layout>
-    <layout-to-restore>
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info id="npm" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32831326" />
-      <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32910052" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3298193" />
-      <window_info anchor="bottom" id="Command Line Tools Console" order="13" weight="0.32916668" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32169312" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Messages" order="12" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15867944" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first" />
@@ -443,307 +198,29 @@
     <MESSAGE value="remove console log" />
     <MESSAGE value="tons of updates" />
     <MESSAGE value="tons of stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="tons of stuff" />
+    <MESSAGE value="read url package json" />
+    <option name="LAST_COMMIT_MESSAGE" value="read url package json" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="3" />
-    </breakpoint-manager>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/bitbucket/oauth.js" />
-    <entry file="file://$PROJECT_DIR$/lib/bitbucket/onboardNewUser.js" />
-    <entry file="file://$PROJECT_DIR$/models/user.js" />
-    <entry file="file://$PROJECT_DIR$/models/repository.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/installation/model.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="13" column="3" lean-forward="true" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/analyzeOld.js" />
-    <entry file="file://$PROJECT_DIR$/lib/analyze/flags.js" />
-    <entry file="file://$PROJECT_DIR$/lib/github/createBasicApi.js" />
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="6" column="313" lean-forward="true" selection-start-line="6" selection-start-column="313" selection-end-line="6" selection-end-column="313" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/helpers/shell.js" />
-    <entry file="file://$PROJECT_DIR$/services/github/generateSignedJWT.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="42" lean-forward="true" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/helpers/to.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/github/createUserApi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="16" column="4" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/github/getUserAccessToken.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="10" column="6" lean-forward="true" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/github/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="8" column="21" lean-forward="true" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bin/www" />
-    <entry file="file://$PROJECT_DIR$/models/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/dependency.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/github/createInstallationApi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="30" column="28" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="1" column="64" selection-start-line="1" selection-start-column="59" selection-end-line="1" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/installation/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handlers/process.js" />
-    <entry file="file://$PROJECT_DIR$/handlers/socket/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" column="4" lean-forward="true" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="22" lean-forward="true" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/github/createApi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="18" column="43" lean-forward="true" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/analyze/misc.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="16" column="27" lean-forward="true" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="17" column="23" lean-forward="true" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handlers/socket/analyzeSinglePackageJson.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" column="37" lean-forward="true" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/analyze.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="26" column="36" lean-forward="true" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handlers/server/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="36" column="3" selection-start-line="36" selection-start-column="3" selection-end-line="36" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handlers/socket/analyzeInstallation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handlers/notFound.js" />
-    <entry file="file://$PROJECT_DIR$/handlers/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="23" lean-forward="true" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/helpers/forAxios.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1000">
-          <caret line="50" column="41" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/analyze/calculateLevels.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1360">
-          <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/analyze/calculateVersionsBehind.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1060">
-          <caret line="53" column="14" lean-forward="true" selection-start-line="53" selection-start-column="14" selection-end-line="53" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/analyze/gatherMetaFromPackageJson.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="11" column="36" lean-forward="true" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/analyze/getLicenseData.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="19" column="7" lean-forward="true" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/analyze/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/analyze/licenses.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="848">
-          <caret line="263" column="20" lean-forward="true" selection-start-line="263" selection-start-column="20" selection-end-line="263" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handlers/routes/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/helpers/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" column="6" lean-forward="true" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handlers/routes/updateInstallationRepos.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" column="4" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/helpers/catchErrors.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handlers/routes/addInstallation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="24" column="22" lean-forward="true" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handlers/routes/authorize.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handlers/routes/getInstallationRepos.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
+  <component name="WindowStateProjectService">
+    <state x="430" y="107" key="CommitChangelistDialog2" timestamp="1579744151870">
+      <screen x="0" y="23" width="1792" height="1097" />
+    </state>
+    <state x="430" y="107" key="CommitChangelistDialog2/-92.-1057.1920.1057/0.23.1792.1097@0.23.1792.1097" timestamp="1579744151870" />
+    <state x="430" y="107" key="CommitChangelistDialog2/0.23.1792.1097@0.23.1792.1097" timestamp="1579538868194" />
+    <state width="495" height="492" key="Git.Branch.Popup" timestamp="1579744141181">
+      <screen x="0" y="23" width="1792" height="1097" />
+    </state>
+    <state width="495" height="492" key="Git.Branch.Popup/-92.-1057.1920.1057/0.23.1792.1097@0.23.1792.1097" timestamp="1579744141181" />
+    <state width="495" height="492" key="Git.Branch.Popup/0.23.1792.1097@0.23.1792.1097" timestamp="1579490517127" />
+    <state x="396" y="248" key="Vcs.Push.Dialog.v2" timestamp="1579744155633">
+      <screen x="0" y="23" width="1792" height="1097" />
+    </state>
+    <state x="396" y="248" key="Vcs.Push.Dialog.v2/-92.-1057.1920.1057/0.23.1792.1097@0.23.1792.1097" timestamp="1579744155633" />
+    <state x="396" y="248" key="Vcs.Push.Dialog.v2/0.23.1792.1097@0.23.1792.1097" timestamp="1579538869771" />
+    <state x="489" y="326" key="git4idea.merge.GitPullDialog" timestamp="1579744146451">
+      <screen x="0" y="23" width="1792" height="1097" />
+    </state>
+    <state x="489" y="326" key="git4idea.merge.GitPullDialog/-92.-1057.1920.1057/0.23.1792.1097@0.23.1792.1097" timestamp="1579744146451" />
+    <state x="489" y="326" key="git4idea.merge.GitPullDialog/0.23.1792.1097@0.23.1792.1097" timestamp="1579481563162" />
   </component>
 </project>

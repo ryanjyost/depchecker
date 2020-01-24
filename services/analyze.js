@@ -19,9 +19,32 @@ async function analyze(packageJSON, forkedProcess) {
     };
 
     for (let dep in dependencies) {
+      function finishDep(dataToPush) {
+        const finalDepData = { ...dataToPush };
+        console.log("DATA to push", finalDepData);
+        // data is all there, calcultate levels
+        finalDepData.levels = calculateLevels(dataToPush);
+
+        depsData.push(finalDepData);
+
+        if (forkedProcess) {
+          forkedProcess.send({ type: "singleDepData", data: finalDepData });
+        }
+      }
+
+      const DEP_DATA = initSingleDepData(
+        dep,
+        packageJSON.devDependencies && dep in packageJSON.devDependencies
+      );
+
       const { data: npmData, error: npmError } = await forAxios(
         axios.get(`https://registry.npmjs.org/${dep}/`)
       );
+
+      if (npmError) {
+        finishDep(DEP_DATA);
+        continue;
+      }
 
       const downloadsURL = `https://api.npmjs.org/downloads/point/last-week/${dep}`;
       const { data: downloadsData, error: downloadsError } = await forAxios(
@@ -30,18 +53,22 @@ async function analyze(packageJSON, forkedProcess) {
 
       let githubData;
       if (npmData) {
-        let repoUrl = getRepoUrlFromNpmRepoUrl(npmData.repository.url);
+        if (
+          npmData.repository &&
+          npmData.repository.url.includes("github.com")
+        ) {
+          let repoUrl =
+            npmData.repository &&
+            getRepoUrlFromNpmRepoUrl(npmData.repository.url);
 
-        const githubUrl = `https://api.github.com/repos/${repoUrl}?client_id=${process.env.GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_CLIENT_SECRET}`;
+          const githubUrl = `https://api.github.com/repos/${repoUrl}?client_id=${process.env.GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_CLIENT_SECRET}`;
 
-        const { data } = await forAxios(axios.get(githubUrl));
-        githubData = data;
+          const { data, error: githubError } = await forAxios(
+            axios.get(githubUrl)
+          );
+          githubData = data;
+        }
       }
-
-      const DEP_DATA = initSingleDepData(
-        dep,
-        packageJSON.devDependencies && dep in packageJSON.devDependencies
-      );
 
       DEP_DATA.description = npmData.description;
       DEP_DATA.links.homepage = npmData.homepage;
@@ -72,17 +99,10 @@ async function analyze(packageJSON, forkedProcess) {
         DEP_DATA.weeklyDownloads = downloadsData.downloads;
       }
 
-      // data is all there, calcultate levels
-      DEP_DATA.levels = calculateLevels(DEP_DATA);
+      // console.log(`=== ${dep} ===`);
+      // console.log(DEP_DATA);
 
-      console.log(`=== ${dep} ===`);
-      console.log(DEP_DATA);
-
-      depsData.push(DEP_DATA);
-
-      if (forkedProcess) {
-        forkedProcess.send({ type: "singleDepData", data: DEP_DATA });
-      }
+      finishDep(DEP_DATA);
     }
 
     const analysisSummary = summarizeAnalysis(depsData);
