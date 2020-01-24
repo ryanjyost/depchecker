@@ -1,5 +1,5 @@
 {
-  "name": "deps",
+  "name": "depchecker",
   "version": "0.0.0",
   "private": true,
   "scripts": {
