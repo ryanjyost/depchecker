@@ -36,6 +36,8 @@ async function analyze(packageJSON, forkedProcess) {
         packageJSON.devDependencies && dep in packageJSON.devDependencies
       );
 
+      DEP_DATA.versions.project = dependencies[dep];
+
       const { data: npmData, error: npmError } = await forAxios(
         axios.get(`https://registry.npmjs.org/${dep}/`)
       );
@@ -73,8 +75,6 @@ async function analyze(packageJSON, forkedProcess) {
 
           if (githubError) console.log("GITHUB ERROR", githubError);
 
-          console.log("GITHUB", original);
-
           githubData = data;
         }
       }
@@ -83,13 +83,18 @@ async function analyze(packageJSON, forkedProcess) {
       DEP_DATA.links.homepage = npmData.homepage;
       DEP_DATA["dist-tags"] = npmData["dist-tags"];
       DEP_DATA.versions.latest = npmData["dist-tags"].latest;
-      DEP_DATA.versions.project = dependencies[dep];
       DEP_DATA.time = {
         modified: npmData.time.modified,
         created: npmData.time.created,
         project: npmData.time[dependencies[dep].replace(/[\^~]/g, "")],
         latest: npmData.time[npmData["dist-tags"].latest]
       };
+
+      // check if the current version is deprecated
+      const currVersionNpmData = npmData.versions[npmData["dist-tags"].latest];
+      if (currVersionNpmData.deprecated) {
+        DEP_DATA.deprecated = currVersionNpmData.deprecated;
+      }
 
       DEP_DATA.versionsBehind = calculateVersionsBehind(
         dependencies[dep],
