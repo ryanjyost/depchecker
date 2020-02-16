@@ -1,4 +1,5 @@
 const axios = require("axios");
+const filesize = require("filesize");
 const {
   forAxios,
   calculateVersionsBehind,
@@ -52,6 +53,41 @@ async function analyze(packageJSON, forkedProcess) {
         axios.get(`${downloadsURL}`)
       );
 
+      DEP_DATA.description = npmData.description;
+      DEP_DATA.links.homepage = npmData.homepage;
+      DEP_DATA["dist-tags"] = npmData["dist-tags"];
+      DEP_DATA.versions.latest = npmData["dist-tags"].latest;
+      DEP_DATA.time = {
+        modified: npmData.time.modified,
+        created: npmData.time.created,
+        project: npmData.time[dependencies[dep].replace(/[\^~]/g, "")],
+        latest: npmData.time[npmData["dist-tags"].latest]
+      };
+
+      // check if the current version is deprecated
+      const currVersionNpmData = npmData.versions[npmData["dist-tags"].latest];
+      if (currVersionNpmData.deprecated) {
+        DEP_DATA.deprecated = currVersionNpmData.deprecated;
+      }
+
+      const projectVersionNpmData =
+        npmData.versions[dependencies[dep].replace(/[\^~]/g, "")];
+      if (projectVersionNpmData && projectVersionNpmData.dist) {
+        console.log("=======");
+        console.log(dep, projectVersionNpmData);
+        DEP_DATA.size.unpacked = {
+          raw: projectVersionNpmData.dist.unpackedSize,
+          formatted: isNaN(projectVersionNpmData.dist.unpackedSize)
+            ? projectVersionNpmData.dist.unpackedSize
+            : filesize(projectVersionNpmData.dist.unpackedSize)
+        };
+      }
+
+      DEP_DATA.versionsBehind = calculateVersionsBehind(
+        dependencies[dep],
+        npmData["dist-tags"].latest
+      );
+
       let githubData;
       if (npmData) {
         if (
@@ -79,28 +115,6 @@ async function analyze(packageJSON, forkedProcess) {
         }
       }
 
-      DEP_DATA.description = npmData.description;
-      DEP_DATA.links.homepage = npmData.homepage;
-      DEP_DATA["dist-tags"] = npmData["dist-tags"];
-      DEP_DATA.versions.latest = npmData["dist-tags"].latest;
-      DEP_DATA.time = {
-        modified: npmData.time.modified,
-        created: npmData.time.created,
-        project: npmData.time[dependencies[dep].replace(/[\^~]/g, "")],
-        latest: npmData.time[npmData["dist-tags"].latest]
-      };
-
-      // check if the current version is deprecated
-      const currVersionNpmData = npmData.versions[npmData["dist-tags"].latest];
-      if (currVersionNpmData.deprecated) {
-        DEP_DATA.deprecated = currVersionNpmData.deprecated;
-      }
-
-      DEP_DATA.versionsBehind = calculateVersionsBehind(
-        dependencies[dep],
-        npmData["dist-tags"].latest
-      );
-
       if (githubData) {
         DEP_DATA.links.github = githubData.html_url;
         DEP_DATA.stars = githubData.stargazers_count;
@@ -112,9 +126,6 @@ async function analyze(packageJSON, forkedProcess) {
         DEP_DATA.downloads.weekly = downloadsData;
         DEP_DATA.weeklyDownloads = downloadsData.downloads;
       }
-
-      // console.log(`=== ${dep} ===`);
-      // console.log(DEP_DATA);
 
       finishDep(DEP_DATA);
     }
