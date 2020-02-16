@@ -21,7 +21,6 @@ async function analyze(packageJSON, forkedProcess) {
     for (let dep in dependencies) {
       function finishDep(dataToPush) {
         const finalDepData = { ...dataToPush };
-        console.log("DATA to push", finalDepData);
         // data is all there, calcultate levels
         finalDepData.levels = calculateLevels(dataToPush);
 
@@ -61,11 +60,21 @@ async function analyze(packageJSON, forkedProcess) {
             npmData.repository &&
             getRepoUrlFromNpmRepoUrl(npmData.repository.url);
 
-          const githubUrl = `https://api.github.com/repos/${repoUrl}?client_id=${process.env.GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_CLIENT_SECRET}`;
+          const githubUrl = `https://api.github.com/repos/${repoUrl}`;
 
-          const { data, error: githubError } = await forAxios(
-            axios.get(githubUrl)
+          const { data, error: githubError, original } = await forAxios(
+            axios.get(githubUrl, {
+              auth: {
+                username: process.env.GITHUB_CLIENT_ID,
+                password: process.env.GITHUB_CLIENT_SECRET
+              }
+            })
           );
+
+          if (githubError) console.log("GITHUB ERROR", githubError);
+
+          console.log("GITHUB", original);
+
           githubData = data;
         }
       }
