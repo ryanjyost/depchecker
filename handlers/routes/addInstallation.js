@@ -21,15 +21,7 @@ module.exports = async function(req, res) {
   if (error) return res.status(404).json({ error: "Installation not found" });
 
   // create a Depchecker installation record
-  const installation = await Installations.createInstallation({
-    githubId: data.id,
-    repos: [],
-    account: {
-      id: data.account.id,
-      login: data.account.login,
-      type: data.account.type
-    }
-  });
+  const installation = await Installations.createInstallation(data);
 
   res.status(200).json({ response: { installation } });
 };

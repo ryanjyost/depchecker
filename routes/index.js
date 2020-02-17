@@ -17,6 +17,7 @@ router.post("/auth", catchErrors(Handlers.routes.authorize));
 /* =================
  * Installations
  */
+router.post("/installations/setup", Handlers.routes.setupNewInstallation);
 router.post("/installations", Handlers.routes.addInstallation);
 router.get(
   "/installations/:installationId/repos",

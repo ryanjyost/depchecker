@@ -73,8 +73,6 @@ async function analyze(packageJSON, forkedProcess) {
       const projectVersionNpmData =
         npmData.versions[dependencies[dep].replace(/[\^~]/g, "")];
       if (projectVersionNpmData && projectVersionNpmData.dist) {
-        console.log("=======");
-        console.log(dep, projectVersionNpmData);
         DEP_DATA.size.unpacked = {
           raw: projectVersionNpmData.dist.unpackedSize,
           formatted: isNaN(projectVersionNpmData.dist.unpackedSize)

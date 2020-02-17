@@ -23,13 +23,6 @@ module.exports = token => {
 
   const getRepo = repoUrl => api.get(`/repos/${repoUrl}`);
 
-  // const githubURL = `${url.replace(
-  //   "https://github.com",
-  //   "https://api.github.com/repos"
-  // )}/contents/package.json?client_id=${
-  //   process.env.GITHUB_CLIENT_ID
-  // }&client_secret=${process.env.GITHUB_CLIENT_SECRET}`;
-
   const getRepoPackageJSON = (owner, repo) =>
     api.get(`/repos/${owner}/${repo}/contents/package.json${basicAuthParams}`, {
       headers: {

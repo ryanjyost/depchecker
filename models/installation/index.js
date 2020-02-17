@@ -3,10 +3,20 @@ const Installation = require("./model");
 module.exports = {
   createInstallation: async data => {
     try {
-      const installation = await Installation.create(data);
+      const installation = await Installation.create({
+        githubId: data.id,
+        repos: [],
+        account: {
+          id: data.account.id,
+          login: data.account.login,
+          type: data.account.type
+        }
+      });
+
+      if (!installation) throw Error();
       return installation;
     } catch (e) {
-      return await Installation.findOne({ githubId: data.githubId });
+      return Installation.findOne({ githubId: data.id });
     }
   },
   findInstallation: async githubId => {
