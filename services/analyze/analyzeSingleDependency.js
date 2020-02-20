@@ -34,7 +34,6 @@ module.exports = async function analyzeSingleDependency(
   DEP_DATA.size = getSizeData(npmData, npmData["dist-tags"].latest);
 
   // add project-specific data
-  // DEP_DATA.project = getProjectData();
   const projectVersionNpmData = npmData.versions[projectVersion];
   DEP_DATA.project.version = projectVersion;
   DEP_DATA.project.versionsBehind = calculateVersionsBehind(
@@ -43,7 +42,8 @@ module.exports = async function analyzeSingleDependency(
   );
   DEP_DATA.project.release = npmData.time[projectVersion];
   DEP_DATA.project.size = getSizeData(npmData, projectVersion);
-  DEP_DATA.project.deprecated = projectVersion.deprecated;
+  // const currVersionNpmData = npmData.versions[npmData["dist-tags"].latest];
+  DEP_DATA.project.deprecated = projectVersionNpmData.deprecated || false;
 
   return finishDep(DEP_DATA);
 };
@@ -137,5 +137,3 @@ async function getAndApplyGitHubData(depData, npmData) {
 
   return depData;
 }
-
-async function getProjectData() {}
