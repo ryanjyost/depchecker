@@ -1,6 +1,7 @@
-const { summarizeAnalysis } = require("../../lib");
+const { summarizeAnalysis, calculateLevels } = require("../../lib");
 
 const analyzeSingleDependency = require("./analyzeSingleDependency");
+const applyProjectData = require("./applyProjectData");
 
 async function analyze(packageJSON, forkedProcess) {
   try {
@@ -12,11 +13,29 @@ async function analyze(packageJSON, forkedProcess) {
     };
 
     for (let dep in dependencies) {
+      const projectVersion = dependencies[dep];
+      const isDev =
+        packageJSON.devDependencies && dep in packageJSON.devDependencies;
+
       const singleDepData = await analyzeSingleDependency(
         dep,
-        packageJSON,
-        forkedProcess
+        projectVersion,
+        isDev
       );
+
+      singleDepData.levels = calculateLevels(singleDepData);
+      singleDepData.project.levels = singleDepData.levels.versionsBehind;
+
+      if (forkedProcess) {
+        forkedProcess.send({ type: "singleDepData", data: singleDepData });
+      }
+
+      // // apply project specific data
+      // const dataWithProjectSpecifics = await applyProjectData(singleDepData);
+      // singleDepData.versions.project = dependencies[dep];
+      // // DEP_DATA.time.project = npmData.time[dependencies[dep].replace(/[\^~]/g, "")];
+      // dataWithProjectSpecifics.levels = calculateLevels(singleDepData);
+
       depsData.push(singleDepData);
     }
 

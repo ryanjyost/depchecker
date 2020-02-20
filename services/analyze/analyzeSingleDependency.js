@@ -4,31 +4,19 @@ const {
   forAxios,
   calculateVersionsBehind,
   getLicenseData,
-  calculateLevels,
   getRepoUrlFromNpmRepoUrl,
   initSingleDepData
 } = require("../../lib");
 
 module.exports = async function analyzeSingleDependency(
   dep,
-  packageJSON,
-  forkedProcess
+  rawProjectVersion,
+  isDev
 ) {
-  // easier to combine deps and loop through them all
-  const dependencies = {
-    ...packageJSON.devDependencies,
-    ...packageJSON.dependencies
-  };
-
-  const projectVersion = dependencies[dep].replace(/[\^~]/g, "");
+  const projectVersion = rawProjectVersion.replace(/[\^~]/g, "");
 
   // initialize the data structure for a single dep
-  let DEP_DATA = initSingleDepData(
-    dep,
-    packageJSON.devDependencies && dep in packageJSON.devDependencies
-  );
-
-  DEP_DATA.versions.project = dependencies[dep];
+  let DEP_DATA = initSingleDepData(dep, isDev);
 
   // get the npm package info
   const { data: npmData, error: npmError } = await forAxios(
@@ -37,48 +25,48 @@ module.exports = async function analyzeSingleDependency(
 
   // not on npm, dont even bother trying to find on GitHub
   if (!npmData || npmError) {
-    return finishDep(DEP_DATA, forkedProcess);
+    return finishDep(DEP_DATA);
   }
 
   DEP_DATA = applyNpmData(DEP_DATA, npmData);
-  DEP_DATA.time.project = npmData.time[dependencies[dep].replace(/[\^~]/g, "")];
-  DEP_DATA.size = getSizeData(npmData, projectVersion);
-  DEP_DATA.versionsBehind = calculateVersionsBehind(
-    dependencies[dep],
+  DEP_DATA = await getAndApplyGitHubData(DEP_DATA, npmData);
+  DEP_DATA = await getAndApplyDownloadData(DEP_DATA);
+  DEP_DATA.size = getSizeData(npmData, npmData["dist-tags"].latest);
+
+  // add project-specific data
+  // DEP_DATA.project = getProjectData();
+  const projectVersionNpmData = npmData.versions[projectVersion];
+  DEP_DATA.project.version = projectVersion;
+  DEP_DATA.project.versionsBehind = calculateVersionsBehind(
+    projectVersion,
     npmData["dist-tags"].latest
   );
-  DEP_DATA = await getAndApplyGitHubData(DEP_DATA, npmData);
+  DEP_DATA.project.release = npmData.time[projectVersion];
+  DEP_DATA.project.size = getSizeData(npmData, projectVersion);
+  DEP_DATA.project.deprecated = projectVersion.deprecated;
 
-  const downloadsData = await getDownloadData(dep);
-  if (downloadsData) {
-    DEP_DATA.downloads.weekly = downloadsData;
-    DEP_DATA.weeklyDownloads = downloadsData.downloads;
-  }
-
-  return finishDep(DEP_DATA, forkedProcess);
+  return finishDep(DEP_DATA);
 };
 
-/**
+/*********************************
  * Helpers
  */
 
-function finishDep(dataToPush, forkedProcess) {
-  const finalDepData = { ...dataToPush };
-  // data is all there, calculate levels
-  finalDepData.levels = calculateLevels(dataToPush);
-
-  if (forkedProcess) {
-    forkedProcess.send({ type: "singleDepData", data: finalDepData });
-  }
-
-  return finalDepData;
+function finishDep(dataToPush) {
+  return dataToPush;
 }
 
-async function getDownloadData(dep) {
+async function getAndApplyDownloadData(depData) {
   try {
-    const downloadsURL = `https://api.npmjs.org/downloads/point/last-week/${dep}`;
+    const downloadsURL = `https://api.npmjs.org/downloads/point/last-week/${depData.name}`;
     const { data } = await forAxios(axios.get(`${downloadsURL}`));
-    return data;
+
+    if (data) {
+      depData.downloads.weekly = data;
+      depData.weeklyDownloads = data.downloads;
+    }
+
+    return depData;
   } catch (e) {
     return null;
   }
@@ -104,8 +92,8 @@ function applyNpmData(depData, npmData) {
   return depData;
 }
 
-function getSizeData(npmData, projectVersion) {
-  const projectVersionNpmData = npmData.versions[projectVersion];
+function getSizeData(npmData, version) {
+  const projectVersionNpmData = npmData.versions[version];
   if (projectVersionNpmData && projectVersionNpmData.dist) {
     return {
       unpacked: {
@@ -149,3 +137,5 @@ async function getAndApplyGitHubData(depData, npmData) {
 
   return depData;
 }
+
+async function getProjectData() {}
