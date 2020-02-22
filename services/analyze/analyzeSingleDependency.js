@@ -8,13 +8,10 @@ const {
   initSingleDepData
 } = require("../../lib");
 
-module.exports = async function analyzeSingleDependency(
+exports.analyzeSingleDependency = async function analyzeSingleDependency(
   dep,
-  rawProjectVersion,
   isDev
 ) {
-  const projectVersion = rawProjectVersion.replace(/[\^~]/g, "");
-
   // initialize the data structure for a single dep
   let DEP_DATA = initSingleDepData(dep, isDev);
 
@@ -31,19 +28,7 @@ module.exports = async function analyzeSingleDependency(
   DEP_DATA = applyNpmData(DEP_DATA, npmData);
   DEP_DATA = await getAndApplyGitHubData(DEP_DATA, npmData);
   DEP_DATA = await getAndApplyDownloadData(DEP_DATA);
-  DEP_DATA.size = getSizeData(npmData, npmData["dist-tags"].latest);
-
-  // add project-specific data
-  const projectVersionNpmData = npmData.versions[projectVersion];
-  DEP_DATA.project.version = projectVersion;
-  DEP_DATA.project.versionsBehind = calculateVersionsBehind(
-    projectVersion,
-    npmData["dist-tags"].latest
-  );
-  DEP_DATA.project.release = npmData.time[projectVersion];
-  DEP_DATA.project.size = getSizeData(npmData, projectVersion);
-  // const currVersionNpmData = npmData.versions[npmData["dist-tags"].latest];
-  DEP_DATA.project.deprecated = projectVersionNpmData.deprecated || false;
+  // DEP_DATA.size = getSizeData(npmData, npmData["dist-tags"].latest);
 
   return finishDep(DEP_DATA);
 };
@@ -73,9 +58,19 @@ async function getAndApplyDownloadData(depData) {
 }
 
 function applyNpmData(depData, npmData) {
+  console.log("npm", npmData);
+  depData.npm = {
+    // versions: npmData.versions,
+    time: npmData.time,
+    "dist-tags": npmData["dist-tags"]
+  };
   depData.description = npmData.description;
   depData.links.homepage = npmData.homepage;
-  depData["dist-tags"] = npmData["dist-tags"];
+  depData["dist-tags"] = {
+    latest: npmData["dist-tags"].latest,
+    previous: npmData["dist-tags"].previous,
+    next: npmData["dist-tags"].next
+  };
   depData.versions.latest = npmData["dist-tags"] && npmData["dist-tags"].latest;
   depData.time = {
     modified: npmData.time.modified,
@@ -105,6 +100,8 @@ function getSizeData(npmData, version) {
     };
   }
 }
+
+exports.getSizeData = getSizeData;
 
 async function getAndApplyGitHubData(depData, npmData) {
   let githubData;

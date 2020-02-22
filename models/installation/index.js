@@ -32,8 +32,4 @@ module.exports = {
   getInstallationFromLogin: async login => {
     return await Installation.findOne({ "account.login": login });
   }
-
-  // 	return await Group.findOneAndUpdate(groupQuery, {
-  // 	$push: { members: userId }
-  // });
 };
