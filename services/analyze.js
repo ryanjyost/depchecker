@@ -55,6 +55,7 @@ async function analyze(packageJSON, forkedProcess) {
       if (npmData) {
         if (
           npmData.repository &&
+          npmData.repository.url &&
           npmData.repository.url.includes("github.com")
         ) {
           let repoUrl =
