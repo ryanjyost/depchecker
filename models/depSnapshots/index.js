@@ -32,13 +32,12 @@ module.exports = {
 
 function parseAndPrep(snapshot) {
   if (!snapshot) return snapshot;
-  console.log(snapshot)
   // const buff = Buffer.from(snapshot.npm, "base64");
   // console.log("SNAP", buff.toString("ascii"));
   // const json = JSON.parse(buff.toString("ascii"));
   return {
     created_at: snapshot.created_at,
     ...snapshot.data,
-    ...{ npm: JSON.parse(snapshot) }
+    ...{ npm: JSON.parse(snapshot.npm) }
   };
 }

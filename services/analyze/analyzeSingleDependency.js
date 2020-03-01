@@ -2,7 +2,6 @@ const axios = require("axios");
 const filesize = require("filesize");
 const {
   forAxios,
-  calculateVersionsBehind,
   getLicenseData,
   getRepoUrlFromNpmRepoUrl,
   initSingleDepData
@@ -22,15 +21,23 @@ exports.analyzeSingleDependency = async function analyzeSingleDependency(
 
   // not on npm, dont even bother trying to find on GitHub
   if (!npmData || npmError) {
-    return finishDep(DEP_DATA);
+    return {
+      depData: DEP_DATA,
+      npmData
+    };
   }
 
   DEP_DATA = applyNpmData(DEP_DATA, npmData);
   DEP_DATA = await getAndApplyGitHubData(DEP_DATA, npmData);
   DEP_DATA = await getAndApplyDownloadData(DEP_DATA);
-  // DEP_DATA.size = getSizeData(npmData, npmData["dist-tags"].latest);
+  DEP_DATA.size = await getSizeData(
+    npmData.versions[npmData["dist-tags"].latest]
+  );
 
-  return finishDep(DEP_DATA);
+  return {
+    depData: DEP_DATA,
+    npmData
+  };
 };
 
 /*********************************
@@ -58,9 +65,7 @@ async function getAndApplyDownloadData(depData) {
 }
 
 function applyNpmData(depData, npmData) {
-  console.log("npm", npmData);
   depData.npm = {
-    // versions: npmData.versions,
     time: npmData.time,
     "dist-tags": npmData["dist-tags"]
   };
@@ -87,18 +92,23 @@ function applyNpmData(depData, npmData) {
   return depData;
 }
 
-function getSizeData(npmData, version) {
-  const projectVersionNpmData = npmData.versions[version];
-  if (projectVersionNpmData && projectVersionNpmData.dist) {
+function getSizeData(versionNpmData) {
+  if (versionNpmData && versionNpmData.dist) {
+    const bytes = versionNpmData.dist.unpackedSize;
     return {
       unpacked: {
-        raw: projectVersionNpmData.dist.unpackedSize,
-        formatted: isNaN(projectVersionNpmData.dist.unpackedSize)
-          ? projectVersionNpmData.dist.unpackedSize
-          : filesize(projectVersionNpmData.dist.unpackedSize)
+        raw: versionNpmData.dist.unpackedSize,
+        formatted: isNaN(versionNpmData.dist.unpackedSize)
+          ? bytes
+          : filesize(bytes, {
+              base: 10,
+              round: bytes > 10 * 1000 ? 2 : 0
+            })
       }
     };
   }
+
+  return null;
 }
 
 exports.getSizeData = getSizeData;

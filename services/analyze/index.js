@@ -22,24 +22,47 @@ async function analyze(packageJSON, forkedProcess) {
     };
 
     for (let dep in dependencies) {
-      const recentDepSnapshot = await DepSnapshots.findRecentSnapshot(dep);
-      console.log("RECENT", recentDepSnapshot);
+      let existingData = forkedProcess
+        ? null
+        : await DepSnapshots.findRecentSnapshot(dep);
+      let singleDepData, npmData;
 
-      const isDev =
-        packageJSON.devDependencies && dep in packageJSON.devDependencies;
+      if (existingData) {
+        singleDepData = existingData;
+      } else {
+        const isDev =
+          packageJSON.devDependencies && dep in packageJSON.devDependencies;
 
-      // gather bunch of info about the dep
-      const singleDepData = await analyzeSingleDependency(dep, isDev);
+        // gather bunch of info about the dep
+        let { depData, npmData: tempNpmData } = await analyzeSingleDependency(
+          dep,
+          isDev
+        );
+        singleDepData = depData;
+        npmData = tempNpmData;
 
-      // use data to get severity levels
-      singleDepData.levels = calculateLevels(singleDepData);
+        // use data to get severity levels
+        singleDepData.levels = await calculateLevels(singleDepData);
 
-      // save the snapshot to use next time
-      await DepSnapshots.createDepSnapshot(singleDepData);
+        // save the snapshot to use next time
+        if (singleDepData.npm) {
+          await DepSnapshots.createDepSnapshot(singleDepData);
+        }
+      }
 
       // add project-specific data
       const projectVersion = dependencies[dep];
+      const cleanProjectVersion = projectVersion.replace(/[\^~]/g, "");
       singleDepData.project = getProjectData(singleDepData, projectVersion);
+
+      if (
+        npmData &&
+        npmData.versions &&
+        npmData.versions[cleanProjectVersion]
+      ) {
+        singleDepData.project.size = getSizeData(npmData.versions[cleanProjectVersion]);
+      }
+
       singleDepData.project.levels = levelMethods.versionsBehind(
         singleDepData.project.versionsBehind
       );
@@ -96,7 +119,6 @@ function getProjectData(depData, rawProjectVersion) {
   };
 
   if (depData.npm) {
-    // const projectVersionNpmData = depData.npm.versions[projectVersion];
     return {
       ...project,
       ...{
@@ -104,9 +126,7 @@ function getProjectData(depData, rawProjectVersion) {
           projectVersion,
           depData.npm["dist-tags"].latest
         ),
-        release: depData.npm.time[projectVersion],
-        // size: getSizeData(depData.npm, projectVersion),
-        // deprecated: projectVersionNpmData.deprecated || false
+        release: depData.npm.time[projectVersion]
       }
     };
   }
