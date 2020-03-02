@@ -36,6 +36,8 @@ app.use("/", index);
 app.use(Handlers.middleware.notFound);
 app.use(Handlers.middleware.error);
 
+require('./lib/stars')()
+
 // start Socket.io and listen for new connections
 const io = socketIo(server);
 io.on("connection", Handlers.socket);
