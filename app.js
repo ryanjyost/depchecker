@@ -8,6 +8,7 @@ const fileUpload = require("express-fileupload");
 const http = require("http");
 const socketIo = require("socket.io");
 const debug = require("debug")("deps:server");
+
 require("dotenv").config();
 require("./db");
 
@@ -41,6 +42,8 @@ io.on("connection", Handlers.socket);
 
 server.on("error", Handlers.server.onError);
 server.on("listening", onListening);
+
+require("./handlers/cron")();
 
 module.exports = app;
 

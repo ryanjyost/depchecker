@@ -16,7 +16,7 @@ module.exports = async installationId => {
   );
 
   const instToken = response.data.token;
-  const api = await await axios.create({
+  const api = await axios.create({
     baseURL: "https://api.github.com",
     timeout: 3 * 60 * 1000,
     headers: {

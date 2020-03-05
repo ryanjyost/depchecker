@@ -1,3 +1,4 @@
 module.exports = {
-  Installations: require("./installation")
+  Installations: require("./installation"),
+  DepSnapshots: require("./depSnapshots")
 };
