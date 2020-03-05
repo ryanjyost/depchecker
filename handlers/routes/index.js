@@ -4,5 +4,7 @@ module.exports = {
   getInstallationRepos: require("./getInstallationRepos"),
   updateInstallationRepos: require("./updateInstallationRepos"),
   readPackageJSON: require("./readPackageJSON"),
-  setupNewInstallation: require("./setupNewInstallation")
+  setupNewInstallation: require("./setupNewInstallation"),
+  followTheStars: require("./followTheStars"),
+  unsubscribe: require("./unsubscribeFromFollowTheStars")
 };

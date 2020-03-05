@@ -13,10 +13,11 @@ const { catchErrors } = require("../lib");
  * Misc
  */
 router.post("/auth", catchErrors(Handlers.routes.authorize));
+router.post("/read_package_json", Handlers.routes.readPackageJSON);
+router.post("/follow-the-stars", Handlers.routes.followTheStars);
+router.delete("/follow-the-stars/:userId", Handlers.routes.unsubscribe);
 
-/* =================
- * Installations
- */
+/** Installations */
 router.post("/installations/setup", Handlers.routes.setupNewInstallation);
 router.post("/installations", Handlers.routes.addInstallation);
 router.get(
@@ -27,8 +28,6 @@ router.put(
   "/installations/:installationid/repos",
   Handlers.routes.updateInstallationRepos
 );
-
-router.post("/read_package_json", Handlers.routes.readPackageJSON);
 
 router.get("/installations/:installationId", async (req, res) => {
   try {

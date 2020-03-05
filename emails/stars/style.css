@@ -11,6 +11,10 @@ li {
   color: rgba(0,0,0,.8);
 }
 
+p {
+  font-size: 18px;
+}
+
 h2 {
   rgba(67, 178, 170, 1)
 }
@@ -48,6 +52,7 @@ a:hover {
 
 li a {
   font-weight: bold;
+  font-size: 20px;
 }
 
 li p {
