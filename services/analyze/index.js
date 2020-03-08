@@ -22,12 +22,15 @@ async function analyze(packageJSON, forkedProcess) {
     };
 
     for (let dep in dependencies) {
-      let existingData = forkedProcess
-        ? null
-        : await DepSnapshots.findRecentSnapshot(dep);
+      console.log("===========");
+      console.log({ dep });
+
+      let existingData = await DepSnapshots.findRecentSnapshot(dep);
+
       let singleDepData, npmData;
 
       if (existingData) {
+        console.log("Use existing!", dep);
         singleDepData = existingData;
       } else {
         const isDev =
@@ -60,7 +63,9 @@ async function analyze(packageJSON, forkedProcess) {
         npmData.versions &&
         npmData.versions[cleanProjectVersion]
       ) {
-        singleDepData.project.size = getSizeData(npmData.versions[cleanProjectVersion]);
+        singleDepData.project.size = getSizeData(
+          npmData.versions[cleanProjectVersion]
+        );
       }
 
       singleDepData.project.levels = levelMethods.versionsBehind(
@@ -83,7 +88,7 @@ async function analyze(packageJSON, forkedProcess) {
       forkedProcess.send({ type: "finalRepoData", data: analysisSummary });
     }
 
-    return depsData.sort((a, b) => {
+    const sortedDeps = depsData.sort((a, b) => {
       a = a ? a.name || "" : "";
       b = b ? b.name || "" : "";
 
@@ -92,6 +97,15 @@ async function analyze(packageJSON, forkedProcess) {
 
       return 0;
     });
+
+    if (!forkedProcess) {
+      return {
+        deps: sortedDeps,
+        summary: analysisSummary
+      };
+    }
+
+    return sortedDeps;
   } catch (e) {
     console.log(e);
     return "error";

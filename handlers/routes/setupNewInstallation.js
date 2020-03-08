@@ -16,6 +16,8 @@ module.exports = async function(req, res) {
       AppApi.getInstallation(installationId)
     );
 
+    console.log("install data", data);
+
     if (error) return res.status(404).json({ error: "Installation not found" });
 
     const InstallationApi = await GitHub.createInstallationApi(installationId);
