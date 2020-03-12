@@ -25,13 +25,20 @@ module.exports = async installationId => {
     }
   });
 
-  const getPackageJson = (loginName, repoName) =>
-    api.get(`/repos/${loginName}/${repoName}/contents/package.json`);
+  const getPackageJson = (owner, repoName, ref) =>
+    api.get(
+      `/repos/${owner}/${repoName}/contents/package.json`,
+      ref ? { ref } : null
+    );
 
   const getInstallationRepos = () => api.get(`/installation/repositories`);
 
+  // const addWebhookToRepo = (owner, repo, payload) =>
+  //   api.post(`/repos/${owner}/${repo}`, payload);
+
   return {
     get: api.get,
+    post: api.post,
     getPackageJson,
     getInstallationRepos
   };

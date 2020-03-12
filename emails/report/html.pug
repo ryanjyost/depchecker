@@ -5,3 +5,13 @@ html
 
     body
         h1 Depchecker
+        //ul
+        //    each dep in deps
+        //        li
+        //            a(href=dep.url)=dep.name
+
+        h2 Maintenance Issues
+        h4 These deps haven't had a new version released on npm in more than a year.
+        ul
+            each message in messages.bad
+                li=message

@@ -14,6 +14,8 @@ const { catchErrors } = require("../lib");
  */
 router.post("/auth", catchErrors(Handlers.routes.authorize));
 router.post("/read_package_json", Handlers.routes.readPackageJSON);
+router.get("/github/event", Handlers.routes.ghEvent);
+router.post("/github/event", Handlers.routes.ghEvent);
 router.post("/follow-the-stars", Handlers.routes.followTheStars);
 router.delete("/follow-the-stars/:userId", Handlers.routes.unsubscribe);
 

@@ -2,6 +2,7 @@ const Installation = require("./model");
 
 module.exports = {
   createInstallation: async data => {
+    console.log("CREATE", data);
     try {
       const installation = await Installation.create({
         githubId: data.id,

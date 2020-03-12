@@ -25,7 +25,8 @@ async function analyze(packageJSON, forkedProcess) {
       console.log("===========");
       console.log({ dep });
 
-      let existingData = await DepSnapshots.findRecentSnapshot(dep);
+      // let existingData = await DepSnapshots.findRecentSnapshot(dep);
+      let existingData = null;
 
       let singleDepData, npmData;
 
