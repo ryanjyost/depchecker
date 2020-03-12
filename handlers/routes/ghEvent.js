@@ -16,7 +16,7 @@ module.exports = async function(req, res) {
   console.log("WEBHOOK", req.body);
   if (
     action === "opened" ||
-    action === "synchronize" ||
+    // action === "synchronize" ||
     action === "reopened"
   ) {
     console.log("======= OPENED ========");
