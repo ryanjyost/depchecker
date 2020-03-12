@@ -132,6 +132,18 @@ async function getAndApplyGitHubData(depData, npmData) {
       );
 
       githubData = data;
+
+      // const issuesUrl =
+      //   data.issues_url && data.issues_url.replace("{/number}", "");
+      //
+      // const { data: issues } = await forAxios(
+      //   axios.get(issuesUrl, {
+      //     auth: {
+      //       username: process.env.GITHUB_CLIENT_ID,
+      //       password: process.env.GITHUB_CLIENT_SECRET
+      //     }
+      //   })
+      // );
     }
   }
 

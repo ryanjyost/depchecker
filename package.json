@@ -27,7 +27,7 @@
     "filesize": "^6.0.1",
     "form-urlencoded": "^3.0.0",
     "hbs": "~4.0.1",
-    "javascript-time-ago": "^2.0.1",
+    "javascript-time-ago": "^2.0.7",
     "json2csv": "^4.3.3",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
