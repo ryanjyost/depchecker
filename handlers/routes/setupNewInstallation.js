@@ -3,7 +3,6 @@ const { Installations } = require("../../models");
 const { forAxios } = require("../../lib");
 
 module.exports = async function(req, res) {
-  console.log("SETUP INSTALL");
   try {
     // code to exchange for access token
     const { installationId } = req.body;
@@ -16,8 +15,6 @@ module.exports = async function(req, res) {
       AppApi.getInstallation(installationId)
     );
 
-    console.log("install data", data);
-
     if (error) return res.status(404).json({ error: "Installation not found" });
 
     const InstallationApi = await GitHub.createInstallationApi(installationId);
@@ -27,6 +24,40 @@ module.exports = async function(req, res) {
 
     // create a Depchecker installation record
     const installation = await Installations.createInstallation(data);
+
+    // add web hooks to repos with
+    for (let repo of repoData.repositories) {
+      const { data: packageJSONContents } = await forAxios(
+        InstallationApi.get(
+          repo.contents_url.replace("{+path}", "package.json")
+        )
+      );
+      if (!packageJSONContents.content) continue;
+
+      console.log("------------------");
+      console.log("REPO", repo);
+
+      const hook = {
+        name: "web",
+        active: true,
+        events: ["pull_request"],
+        config: {
+          url: "http://cf01928b.ngrok.io/github/webhook",
+          content_type: "json",
+          insecure_ssl: "0"
+        }
+      };
+
+      // const { data: webhookResponse, error: webhooksError } = await forAxios(
+      //   InstallationApi.post(repo.hooks_url, hook)
+      // );
+      //
+      // if (webhooksError) console.log(webhooksError);
+      //
+      // console.log(webhookResponse);
+
+      // const {data:packageJSON, error} = await forAxios(InstallationApi.getPackageJson())
+    }
 
     res.status(200).json({ response: { installation, repos: repoData } });
   } catch (e) {

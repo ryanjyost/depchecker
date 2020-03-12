@@ -6,5 +6,6 @@ module.exports = {
   readPackageJSON: require("./readPackageJSON"),
   setupNewInstallation: require("./setupNewInstallation"),
   followTheStars: require("./followTheStars"),
-  unsubscribe: require("./unsubscribeFromFollowTheStars")
+  unsubscribe: require("./unsubscribeFromFollowTheStars"),
+  ghEvent: require("./ghEvent")
 };
