@@ -45,8 +45,6 @@ server.on("listening", onListening);
 
 require("./handlers/cron")();
 require("./lib/analyze/handleSingleInstallationReport")();
-// require("./lib/stars/getStars")();
-// require()
 
 module.exports = app;
 
