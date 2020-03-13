@@ -16,7 +16,6 @@ module.exports = async function sendEmails() {
     .eachPage(
       async function page(records, fetchNextPage) {
         records.forEach(function(record) {
-          console.log("Retrieved", record.get("username"));
           users.push(record);
         });
 

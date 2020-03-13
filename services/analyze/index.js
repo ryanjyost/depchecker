@@ -22,8 +22,6 @@ async function analyze(packageJSON, forkedProcess) {
     };
 
     for (let dep in dependencies) {
-      console.log("===========");
-      console.log({ dep });
 
       // let existingData = await DepSnapshots.findRecentSnapshot(dep);
       let existingData = null;
@@ -31,7 +29,6 @@ async function analyze(packageJSON, forkedProcess) {
       let singleDepData, npmData;
 
       if (existingData) {
-        console.log("Use existing!", dep);
         singleDepData = existingData;
       } else {
         const isDev =
@@ -114,7 +111,6 @@ async function analyze(packageJSON, forkedProcess) {
 }
 
 process.on("message", async packageJSON => {
-  console.log("Start analyzing...");
   const data = await analyze(packageJSON, process);
   process.send(data);
 });

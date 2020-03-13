@@ -7,9 +7,7 @@ module.exports = function(socket) {
   // let the client know the socket id
   socket.emit("socketId", socket.id);
 
-  socket.on("analyzeRepoUrl", url =>
-    analyzeRepoUrl(socket, url)
-  );
+  socket.on("analyzeRepoUrl", url => analyzeRepoUrl(socket, url));
 
   socket.on("analyzePackageJSON", packageJSON =>
     analyzePackageJSON(socket, packageJSON)
@@ -19,7 +17,5 @@ module.exports = function(socket) {
     analyzeInstallation(socket, installationId)
   );
 
-  socket.on("disconnect", () => {
-    console.log("Client disconnected");
-  });
+  socket.on("disconnect", () => {});
 };

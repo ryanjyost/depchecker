@@ -51,7 +51,6 @@ router.post("/installations/:installationId/analyze", async (req, res) => {
   const allRepos = [];
 
   for (let repo of installation.repos) {
-    console.log("=============", repo, "=============");
     let err, response;
     [err, response] = await to(
       InstallationApi.get(

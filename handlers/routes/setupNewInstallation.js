@@ -34,9 +34,6 @@ module.exports = async function(req, res) {
       );
       if (!packageJSONContents.content) continue;
 
-      console.log("------------------");
-      console.log("REPO", repo);
-
       const hook = {
         name: "web",
         active: true,

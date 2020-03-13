@@ -8,102 +8,94 @@ const { GitHub } = require("../../services");
 const {
   analyzeSingleDependency
 } = require("../../services/analyze/analyzeSingleDependency");
-const { DepSnapshots } = require("../../models");
+const { DepSnapshots, Installations } = require("../../models");
 
 module.exports = async function(req, res) {
   const { action, installation, pull_request, repository } = req.body;
   await timeout(5000);
-  console.log("WEBHOOK", req.body);
-  if (
-    action === "opened" ||
-    // action === "synchronize" ||
-    action === "reopened"
-  ) {
-    console.log("======= OPENED ========");
-    const InstallationApi = await GitHub.createInstallationApi(installation.id);
-
-    const contentsUrl = repository.contents_url.replace(
-      "{+path}",
-      "package.json"
-    );
-    const { data: newBranchPackageJsonResponse } = await forAxios(
-      InstallationApi.get(`${contentsUrl}?ref=${pull_request.head.ref}`)
-    );
-
-    const { data: oldBranchPackageJsonResponse } = await forAxios(
-      InstallationApi.get(`${contentsUrl}`)
-    );
-
-    const newPackageJSON = convertPackageJSONFromGitHub(
-      newBranchPackageJsonResponse.content
-    );
-    const oldPackageJSON = convertPackageJSONFromGitHub(
-      oldBranchPackageJsonResponse.content
-    );
-    // console.log("NEW", newPackageJSON);
-    // console.log("Current", oldPackageJSON);
-
-    const newDeps = {
-      ...newPackageJSON.dependencies,
-      ...newPackageJSON.devDependencies
-    };
-
-    const oldDeps = {
-      ...oldPackageJSON.dependencies,
-      ...oldPackageJSON.devDependencies
-    };
-
-    const { results: diffDeps, versionDiffs } = findDiffs(oldDeps, newDeps);
-
-    const newDepsData = [];
-    for (let dep of diffDeps.new) {
-      const depData = await analyzeDep(dep);
-      newDepsData.push(depData);
-    }
-
-    const updatedDepsData = [];
-    for (let dep of diffDeps.updated) {
-      const depData = await analyzeDep(dep);
-      updatedDepsData.push(depData);
-    }
-
-    console.log("++++ new ++++");
-    console.log(newDepsData);
-
-    console.log("++++ updated ++++");
-    console.log(updatedDepsData);
-
-    /** Build Message */
-
-    let newDepsMessage = [],
-      updatedDepsMessage = [];
-
-    if (newDepsData.length) {
-      newDepsMessage = generateMessageFromDeps(newDepsData, true, versionDiffs);
-    }
-
-    if (updatedDepsData.length) {
-      updatedDepsMessage = generateMessageFromDeps(
-        updatedDepsData,
-        false,
-        versionDiffs
+  console.log("GH Event -> ", action);
+  switch (action) {
+    case "created":
+      await Installations.createInstallation(installation);
+      break;
+    case "opened":
+    case "reopened":
+      const InstallationApi = await GitHub.createInstallationApi(
+        installation.id
       );
-    }
 
-    console.log("***************************");
-    console.log(
-      newDepsMessage.join("") +
-        "<br/>" +
-        "**************" +
-        "<br/>" +
-        updatedDepsMessage.join("")
-    );
+      const contentsUrl = repository.contents_url.replace(
+        "{+path}",
+        "package.json"
+      );
+      const { data: newBranchPackageJsonResponse } = await forAxios(
+        InstallationApi.get(`${contentsUrl}?ref=${pull_request.head.ref}`)
+      );
 
-    const { data, error } = await forAxios(
-      InstallationApi.post(pull_request.comments_url, {
-        body: newDepsMessage.join("") + updatedDepsMessage.join("")
-      })
-    );
+      const { data: oldBranchPackageJsonResponse } = await forAxios(
+        InstallationApi.get(`${contentsUrl}`)
+      );
+
+      const newPackageJSON = convertPackageJSONFromGitHub(
+        newBranchPackageJsonResponse.content
+      );
+      const oldPackageJSON = convertPackageJSONFromGitHub(
+        oldBranchPackageJsonResponse.content
+      );
+
+      const newDeps = {
+        ...newPackageJSON.dependencies,
+        ...newPackageJSON.devDependencies
+      };
+
+      const oldDeps = {
+        ...oldPackageJSON.dependencies,
+        ...oldPackageJSON.devDependencies
+      };
+
+      const { results: diffDeps, versionDiffs } = findDiffs(oldDeps, newDeps);
+
+      const newDepsData = [];
+      for (let dep of diffDeps.new) {
+        const depData = await analyzeDep(dep);
+        newDepsData.push(depData);
+      }
+
+      const updatedDepsData = [];
+      for (let dep of diffDeps.updated) {
+        const depData = await analyzeDep(dep);
+        updatedDepsData.push(depData);
+      }
+
+      /** Build Message */
+
+      let newDepsMessage = [],
+        updatedDepsMessage = [];
+
+      if (newDepsData.length) {
+        newDepsMessage = generateMessageFromDeps(
+          newDepsData,
+          true,
+          versionDiffs
+        );
+      }
+
+      if (updatedDepsData.length) {
+        updatedDepsMessage = generateMessageFromDeps(
+          updatedDepsData,
+          false,
+          versionDiffs
+        );
+      }
+
+      const { data, error } = await forAxios(
+        InstallationApi.post(pull_request.comments_url, {
+          body: newDepsMessage.join("") + updatedDepsMessage.join("")
+        })
+      );
+      break;
+    default:
+      return;
   }
 };
 
@@ -125,18 +117,14 @@ function findDiffs(oldDeps, newDeps) {
     versionDiffs[dep] = { before: oldDeps[dep], after: newDeps[dep] };
   }
 
-  console.log("VERSIN DIFFs", versionDiffs);
-
   return { results, versionDiffs };
 }
 
 async function analyzeDep(dep) {
   let existingData = await DepSnapshots.findRecentSnapshot(dep);
   if (existingData) {
-    console.log("existing", dep);
     return existingData;
   } else {
-    console.log("analyze", dep);
     let { depData, npmData: tempNpmData } = await analyzeSingleDependency(dep);
     let singleDepData = depData;
     let npmData = tempNpmData;
@@ -166,8 +154,6 @@ function generateMessageFromDeps(deps, isNew, versionDiffs) {
   );
 
   for (let dep of deps) {
-    console.log("////////////////////////////////");
-    console.log(dep);
     // let depMsg
     MSG.push(`**${dep.name}**`);
     MSG.push(` - ${dep.description}`);

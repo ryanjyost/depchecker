@@ -11,6 +11,7 @@ module.exports = async installationId => {
       Authorization: `Bearer ${token}`
     }
   });
+
   const response = await GitHubApi.post(
     `/app/installations/${installationId}/access_tokens`
   );
@@ -21,9 +22,11 @@ module.exports = async installationId => {
     timeout: 3 * 60 * 1000,
     headers: {
       Accept: "application/vnd.github.machine-man-preview+json",
-      Authorization: `Bearer ${instToken}`
+      Authorization: instToken ? `Bearer ${instToken}` : undefined
     }
   });
+
+  const getAppInstallations = () => GitHubApi.get(`/app`);
 
   const getPackageJson = (owner, repoName, ref) =>
     api.get(
@@ -40,6 +43,8 @@ module.exports = async installationId => {
     get: api.get,
     post: api.post,
     getPackageJson,
-    getInstallationRepos
+    getInstallationRepos,
+    getAppInstallations,
+    GitHubApi
   };
 };
