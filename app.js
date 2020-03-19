@@ -44,8 +44,9 @@ server.on("error", Handlers.server.onError);
 server.on("listening", onListening);
 
 require("./handlers/cron")();
-// require("./lib/analyze/handleSingleInstallationReport")();
 // require("./lib/stars/getStars")();
+// require("./lib/analyze/handleSingleInstallationReport")();
+// require("./lib/playground/playground")();
 // require()
 
 module.exports = app;

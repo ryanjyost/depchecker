@@ -12,6 +12,7 @@ const { DepSnapshots, Installations } = require("../../models");
 
 module.exports = async function(req, res) {
   const { action, installation, pull_request, repository } = req.body;
+  console.log({ installation });
   await timeout(5000);
   console.log("GH Event -> ", action);
   switch (action) {
