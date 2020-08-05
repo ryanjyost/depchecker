@@ -22,7 +22,7 @@
     "dotenv": "^6.2.0",
     "email-templates": "^7.0.4",
     "express": "~4.14.0",
-    "express-fileupload": "^1.1.1-alpha.1",
+    "express-fileupload": "^1.1.9",
     "express-jwt": "^5.3.1",
     "filesize": "^6.0.1",
     "form-urlencoded": "^3.0.0",
