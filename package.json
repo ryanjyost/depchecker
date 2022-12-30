@@ -31,7 +31,7 @@
     "json2csv": "^4.3.3",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
-    "mocha": "^7.0.0",
+    "mocha": "^10.2.0",
     "moment": "^2.23.0",
     "mongoose": "^5.4.0",
     "mongoose-unique-validator": "^2.0.2",
